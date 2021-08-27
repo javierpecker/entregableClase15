@@ -65,7 +65,7 @@ class Productos {
             let findPrd = yield this.find(id);
             console.log(findPrd);
             if (id < 0 || id > productos.length || isNaN(id)) {
-                return "error";
+                return "Id invalido";
             }
             else {
                 const newItem = {
@@ -82,6 +82,19 @@ class Productos {
                 const arrayString = JSON.stringify(productos, null, '\t');
                 yield filesystem_1.writeFile(arrayString, productosfile);
                 return newItem;
+            }
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (id < 0 || id > productos.length || isNaN(id)) {
+                return "Id invalido";
+            }
+            else {
+                productos = productos.filter(aProduct => aProduct.id !== Number(id));
+                const arrayString = JSON.stringify(productos, null, '\t');
+                yield filesystem_1.writeFile(arrayString, productosfile);
+                return "producto eliminado";
             }
         });
     }

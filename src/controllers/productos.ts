@@ -63,23 +63,23 @@ class Producto {
     })
   }
 
-  // deleteProducts (req : Request, res : Response) {
-  //   const id = Number(req.params.id);
+  async deleteProducts (req : Request, res : Response) {
+    const id = Number(req.params.id);
 
-  //   const producto = productsPersistencia.find(id);
+    const producto = await productsPersistencia.find(id);
 
-  //   if(!producto){
-  //     return res.status(404).json({
-  //       msg: "producto not found",
-  //     })
-  //   }
+    if(!producto){
+      return res.status(404).json({
+        msg: "producto not found",
+      })
+    }
 
 
-  //   productsPersistencia.delete(id);
-  //   res.json({
-  //     msg: "producto borrado",
-  //   })
-  // }
+    const msj = await productsPersistencia.delete(id);
+    res.json({
+      msg: msj
+    })
+  }
 }
 
 

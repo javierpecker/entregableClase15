@@ -73,7 +73,7 @@ class Productos {
       console.log(findPrd)
       
       if(id < 0 || id > productos.length || isNaN(id)){
-        return "error"
+        return "Id invalido"
       }
 
       else{
@@ -94,10 +94,17 @@ class Productos {
       }
   }
 
-  // delete(id: number){
-  //   productos = productos.filter(aProduct => aProduct.id !== Number(id))
-  //   return productos;
-  // }
+  async delete(id: number){
+    if(id < 0 || id > productos.length || isNaN(id)){
+      return "Id invalido"
+    }
+    else{
+    productos = productos.filter(aProduct => aProduct.id !== Number(id))
+    const arrayString = JSON.stringify(productos, null, '\t');
+    await writeFile(arrayString, productosfile);
+    return "producto eliminado";
+    }
+  }
 }
 
 export const productsPersistencia = new Productos();

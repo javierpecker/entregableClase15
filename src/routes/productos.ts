@@ -12,7 +12,7 @@ router.post('/',checkAdmin,productsController.checkAddProducts, productsControll
 
 router.put('/:id',checkAdmin, productsController.updateProducts)
 
-// router.delete('/:id',checkAdmin, productsController.deleteProducts)
+router.delete('/:id',checkAdmin, productsController.deleteProducts)
 
 
 export default router;

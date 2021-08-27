@@ -8,5 +8,5 @@ router.get('/', productos_1.productsController.getProducts);
 router.get('/:id', productos_1.productsController.getProducts);
 router.post('/', admin_1.checkAdmin, productos_1.productsController.checkAddProducts, productos_1.productsController.addProducts);
 router.put('/:id', admin_1.checkAdmin, productos_1.productsController.updateProducts);
-// router.delete('/:id',checkAdmin, productsController.deleteProducts)
+router.delete('/:id', admin_1.checkAdmin, productos_1.productsController.deleteProducts);
 exports.default = router;
