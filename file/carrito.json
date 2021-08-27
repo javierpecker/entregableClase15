@@ -1,0 +1,111 @@
+[
+    {
+        "id": 1,
+        "timestamp": "27/08/2021 01:08:58",
+        "productos": [
+            {
+                "id": 1,
+                "timestamp": "26/08/2021 12:08:22",
+                "nombre": "AAAAAAAAAAAAAAAAAAAAAA",
+                "descripcion": "sirve para escribir",
+                "codigo": 123123,
+                "foto": "https://",
+                "precio": 200,
+                "stock": 3
+            },
+            {
+                "id": 2,
+                "timestamp": "26/08/2021 12:08:22",
+                "nombre": "BBBBBBBBBBBBBBBBBBBBB",
+                "descripcion": "sirve para escribir",
+                "codigo": 123123,
+                "foto": "https://",
+                "precio": 200,
+                "stock": 3
+            },
+            {
+                "id": 3,
+                "timestamp": "26/08/2021 12:08:22",
+                "nombre": "CCCCCCCCCCCCCCCCCCCC",
+                "descripcion": "sirve para escribir",
+                "codigo": 123123,
+                "foto": "https://",
+                "precio": 200,
+                "stock": 23
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "timestamp": "27/08/2021 01:08:58",
+        "productos": [
+            {
+                "id": 1,
+                "timestamp": "26/08/2021 12:08:22",
+                "nombre": "lapiz",
+                "descripcion": "sirve para escribir",
+                "codigo": 123123,
+                "foto": "https://",
+                "precio": 200,
+                "stock": 3
+            },
+            {
+                "id": 2,
+                "timestamp": "26/08/2021 12:08:22",
+                "nombre": "sdcasdas",
+                "descripcion": "sirve para escribir",
+                "codigo": 123123,
+                "foto": "https://",
+                "precio": 200,
+                "stock": 3
+            },
+            {
+                "id": 3,
+                "timestamp": "26/08/2021 12:08:22",
+                "nombre": "cartuchera",
+                "descripcion": "sirve para escribir",
+                "codigo": 123123,
+                "foto": "https://",
+                "precio": 200,
+                "stock": 23
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "timestamp": "27/08/2021 01:08:58",
+        "productos": [
+            {
+                "id": 1,
+                "timestamp": "26/08/2021 12:08:22",
+                "nombre": "lapiz",
+                "descripcion": "sirve para escribir",
+                "codigo": 123123,
+                "foto": "https://",
+                "precio": 200,
+                "stock": 3
+            },
+            {
+                "id": 2,
+                "timestamp": "26/08/2021 12:08:22",
+                "nombre": "sdcasdas",
+                "descripcion": "sirve para escribir",
+                "codigo": 123123,
+                "foto": "https://",
+                "precio": 200,
+                "stock": 3
+            },
+            {
+                "id": 3,
+                "timestamp": "26/08/2021 12:08:22",
+                "nombre": "cartuchera",
+                "descripcion": "sirve para escribir",
+                "codigo": 123123,
+                "foto": "https://",
+                "precio": 200,
+                "stock": 23
+            }
+        ]
+    }
+
+]

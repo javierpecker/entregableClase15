@@ -32,7 +32,6 @@ class Productos {
 
   async find(id: number | undefined = undefined) {
     let arrayproductos : any[] = await this.get();
-   
     return  arrayproductos.findIndex(aProduct => aProduct.id == Number(id))
   }
   

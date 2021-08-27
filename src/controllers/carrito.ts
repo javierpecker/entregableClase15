@@ -3,11 +3,11 @@ import {carritoPersistencia} from '../persistencia/carrito';
 
 class Carrito {
 
-  getCarrito (req : Request, res : Response) {
+  async getCarrito (req : Request, res : Response) {
     const id = Number(req.params.id);
 
     if(id){
-      const carrito = carritoPersistencia.get(id);
+      const carrito = await carritoPersistencia.get(id);
       console.log(carrito);
 
       if(!carrito)
@@ -21,7 +21,7 @@ class Carrito {
     }
 
     res.json({
-      data: carritoPersistencia.get(),
+      data: await carritoPersistencia.get(),
     })
   }
 
