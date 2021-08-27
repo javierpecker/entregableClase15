@@ -49,5 +49,21 @@ class Producto {
             });
         });
     }
+    updateProducts(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const id = Number(req.params.id);
+            const producto = productos_1.productsPersistencia.find(id);
+            if (!producto) {
+                return res.status(404).json({
+                    msg: "producto not found",
+                });
+            }
+            const newItem = yield productos_1.productsPersistencia.update(id, req.body);
+            res.json({
+                msg: "actualizando producto",
+                data: newItem
+            });
+        });
+    }
 }
 exports.productsController = new Producto();

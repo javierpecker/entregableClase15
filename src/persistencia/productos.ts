@@ -30,8 +30,11 @@ interface Product {
 
 class Productos {
 
-  find(id: number | undefined = undefined) {
-    return  productos.findIndex(aProduct => aProduct.id == Number(id))
+  async find(id: number | undefined = undefined) {
+    let arrayproductos : any[] = await this.get();
+   
+    //console.log(arrayproductos.findIndex(aProduct => aProduct.id == Number(id)))
+    return  arrayproductos.findIndex(aProduct => aProduct.id == Number(id))
   }
   
   async get(id: number | undefined = undefined){
@@ -66,8 +69,14 @@ class Productos {
   }
 
   async update(id: number, data: addProduct) {
-      let findPrd = await this.find(id)
-      productos = await this.get()
+      let findPrd = await this.find(id);
+      console.log(findPrd)
+      
+      if(id < 0 || id > productos.length || isNaN(id)){
+        return "error"
+      }
+
+      else{
       const newItem: Product = {
         id: id,
         timestamp: setTime,
@@ -77,9 +86,12 @@ class Productos {
         foto: data.foto,
         precio: data.precio,
         stock: data.stock,
-      }
+      };
       productos.splice(Number(findPrd), 1, newItem);
-      return newItem
+      const arrayString = JSON.stringify(productos, null, '\t');
+      await writeFile(arrayString, productosfile);
+      return newItem;
+      }
   }
 
   // delete(id: number){

@@ -7,6 +7,6 @@ const router = express_1.Router();
 router.get('/', productos_1.productsController.getProducts);
 router.get('/:id', productos_1.productsController.getProducts);
 router.post('/', admin_1.checkAdmin, productos_1.productsController.checkAddProducts, productos_1.productsController.addProducts);
-// router.put('/:id',checkAdmin, productsController.updateProducts)
+router.put('/:id', admin_1.checkAdmin, productos_1.productsController.updateProducts);
 // router.delete('/:id',checkAdmin, productsController.deleteProducts)
 exports.default = router;

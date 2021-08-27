@@ -22,8 +22,11 @@ let setTime = moment_1.default(new Date()).format("DD/MM/YYYY HH:MM:SS");
 let productos = [];
 class Productos {
     find(id = undefined) {
-        //console.log(productos.findIndex((aProduct) => aProduct.id == Number(id)))
-        return productos.findIndex(aProduct => aProduct.id == Number(id));
+        return __awaiter(this, void 0, void 0, function* () {
+            let arrayproductos = yield this.get();
+            //console.log(arrayproductos.findIndex(aProduct => aProduct.id == Number(id)))
+            return arrayproductos.findIndex(aProduct => aProduct.id == Number(id));
+        });
     }
     get(id = undefined) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -53,9 +56,33 @@ class Productos {
             console.log(newItem);
             const arrayString = JSON.stringify(productos, null, '\t');
             yield filesystem_1.writeFile(arrayString, productosfile);
-            //return arrayProducts
             productos.push(newItem);
             return newItem;
+        });
+    }
+    update(id, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            let findPrd = yield this.find(id);
+            console.log(findPrd);
+            if (id < 0 || id > productos.length || isNaN(id)) {
+                return "error";
+            }
+            else {
+                const newItem = {
+                    id: id,
+                    timestamp: setTime,
+                    nombre: data.nombre,
+                    descripcion: data.descripcion,
+                    codigo: data.codigo,
+                    foto: data.foto,
+                    precio: data.precio,
+                    stock: data.stock,
+                };
+                productos.splice(Number(findPrd), 1, newItem);
+                const arrayString = JSON.stringify(productos, null, '\t');
+                yield filesystem_1.writeFile(arrayString, productosfile);
+                return newItem;
+            }
         });
     }
 }

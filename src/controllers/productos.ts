@@ -46,7 +46,7 @@ class Producto {
     })
   }
 
-  updateProducts (req : Request, res : Response) {
+  async updateProducts (req : Request, res : Response) {
     const id = Number(req.params.id);
 
     const producto = productsPersistencia.find(id);
@@ -56,7 +56,7 @@ class Producto {
         msg: "producto not found",
       })
     }
-    const newItem = productsPersistencia.update(id, req.body);
+    const newItem = await productsPersistencia.update(id, req.body);
     res.json({
       msg: "actualizando producto",
       data: newItem
@@ -73,6 +73,7 @@ class Producto {
   //       msg: "producto not found",
   //     })
   //   }
+
 
   //   productsPersistencia.delete(id);
   //   res.json({
