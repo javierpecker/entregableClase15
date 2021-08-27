@@ -34,11 +34,28 @@ class Productos {
                 return productos.filter(aProduct => aProduct.id == id);
             }
             const read = yield filesystem_1.readFile(productosfile);
-            console.log(productosfile);
-            console.log(read);
             productos = JSON.parse(read);
-            console.log(productos);
             return productos;
+        });
+    }
+    add(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const newItem = {
+                id: productos.length + 1,
+                timestamp: setTime,
+                nombre: data.nombre,
+                descripcion: data.descripcion,
+                codigo: data.codigo,
+                foto: data.foto,
+                precio: data.precio,
+                stock: data.stock,
+            };
+            console.log(newItem);
+            const arrayString = JSON.stringify(productos, null, '\t');
+            yield filesystem_1.writeFile(arrayString, productosfile);
+            //return arrayProducts
+            productos.push(newItem);
+            return newItem;
         });
     }
 }

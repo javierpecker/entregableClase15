@@ -31,5 +31,23 @@ class Producto {
             });
         });
     }
+    checkAddProducts(req, res, next) {
+        const { nombre, precio } = req.body;
+        if (!nombre || !precio || typeof nombre !== 'string' || isNaN(precio)) {
+            return res.status(400).json({
+                msg: "Campos del body invalidos"
+            });
+        }
+        next();
+    }
+    addProducts(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const newItem = yield productos_1.productsPersistencia.add(req.body);
+            res.json({
+                msg: "producto agregado con exito",
+                data: newItem
+            });
+        });
+    }
 }
 exports.productsController = new Producto();
