@@ -37,31 +37,17 @@ class Carrito {
   //   next();
   // }
 
-  // addProducts (req : Request, res : Response) {
-  //   const newItem = productsPersistencia.add(req.body);
+  async addCarrito (req : Request, res : Response) {
+    const id : number = Number(req.params.id);
 
-  //   res.json({
-  //     msg: "producto agregado con exito",
-  //     data: newItem
-  //   })
-  // }
+    const newItem = await carritoPersistencia.add(1,id);
 
-  // updateProducts (req : Request, res : Response) {
-  //   const id = Number(req.params.id);
+    res.json({
+      msg: "producto agregado con exito al carrito",
+      data: newItem
+    })
+  }
 
-  //   // const producto = productsPersistencia.find(id);
-
-  //   // if(!producto){
-  //   //   return res.status(404).json({
-  //   //     msg: "producto not found",
-  //   //   })
-  //   // }
-  //   const newItem = productsPersistencia.update(id, req.body);
-  //   res.json({
-  //     msg: "actualizando producto",
-  //     data: newItem
-  //   })
-  // }
 
   // deleteProducts (req : Request, res : Response) {
   //   const id = Number(req.params.id);

@@ -30,14 +30,9 @@ class Productos {
     get(id = undefined) {
         return __awaiter(this, void 0, void 0, function* () {
             if (id) {
-                // if(id < 0 || id > productos.length || isNaN(id)){
-                //   return "Id invalido"
-                // }
-                // else{
                 const read = yield filesystem_1.readFile(productosfile);
                 productos = JSON.parse(read);
-                console.log(productos);
-                return productos.filter(aProduct => aProduct.id == id); //}
+                return productos.filter(aProduct => aProduct.id == id);
             }
             const read = yield filesystem_1.readFile(productosfile);
             productos = JSON.parse(read);

@@ -7,7 +7,7 @@ router.get("/list", carritoController.getCarrito)
 
 router.get("/list/:id", carritoController.getCarrito)
 
-// router.post("/add", carritoController.addCart)
+router.post("/add/:id", carritoController.addCarrito)
 
 // router.delete("/delete/:id", carritoController.deleteCart)
 

@@ -16,36 +16,11 @@ exports.carritoPersistencia = void 0;
 const moment_1 = __importDefault(require("moment"));
 const path_1 = __importDefault(require("path"));
 const filesystem_1 = require("./filesystem");
+const productos_1 = require("..//persistencia/productos");
 const carritofile = path_1.default.resolve(__dirname, './../../file/carrito.json');
+const productosfile = path_1.default.resolve(__dirname, './../../file/productos.json');
 let setTime = moment_1.default(new Date()).format("DD/MM/YYYY HH:MM:SS");
 let carrito = [];
-// let carrito = [
-//   { 
-//   "id": 1, 
-//   "timestamp": "26/08/2021 12:08:22",
-//   "productos": [
-//   {id:1, timestamp: "26/08/2021 12:08:22", nombre: "lapiz", descripcion: "sirve para escribir", codigo: 123123, foto: "https://", precio:200, stock: 3},
-//   {id:2, timestamp: "26/08/2021 13:08:74", nombre: "cartuchera", descripcion: "sirve para guardar utiles", codigo: 3333, foto: "https://", precio:230, stock: 3},
-//   {id:3, timestamp: "26/08/2021 15:08:15", nombre: "goma", descripcion: "sirve para borrar", codigo: 12313323, foto: "https://", precio:110, stock: 3},],
-// },
-// { 
-//   "id": 2, 
-//   "timestamp": "26/08/2021 12:08:22",
-//   "productos": [
-//   {id:1, timestamp: "26/08/2021 12:08:22", nombre: "regla", descripcion: "sirve para escribir", codigo: 123123, foto: "https://", precio:200, stock: 3},
-//   {id:2, timestamp: "26/08/2021 13:08:74", nombre: "birome", descripcion: "sirve para guardar utiles", codigo: 3333, foto: "https://", precio:230, stock: 3},
-//   {id:3, timestamp: "26/08/2021 15:08:15", nombre: "sacapuntas", descripcion: "sirve para borrar", codigo: 12313323, foto: "https://", precio:110, stock: 3},],
-// },
-// ]
-// interface addProduct {
-//   timestamp: string,
-//   nombre: string, 
-//   precio: number,
-//   descripcion: string,
-//   codigo: number,
-//   foto: string,
-//   stock: number,
-// }
 // interface Product {
 //   id: number,
 //   nombre: string, 
@@ -65,11 +40,21 @@ class Carritos {
             if (id) {
                 const readCarrito = yield filesystem_1.readFile(carritofile);
                 carrito = JSON.parse(readCarrito);
-                console.log(carrito);
                 return carrito.filter(aCart => aCart.id == id);
             }
             const readCarrito = yield filesystem_1.readFile(carritofile);
             carrito = JSON.parse(readCarrito);
+            return carrito;
+        });
+    }
+    add(idcarrito, id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            carrito = yield this.get(1);
+            const infoProducto = yield productos_1.productsPersistencia.get(id);
+            carrito[0].productos.push(infoProducto[0]);
+            console.log(carrito);
+            const tmpCarrito = JSON.stringify(carrito, null, '\t');
+            yield filesystem_1.writeFile(tmpCarrito, carritofile);
             return carrito;
         });
     }

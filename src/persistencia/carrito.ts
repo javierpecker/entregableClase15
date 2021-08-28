@@ -1,8 +1,10 @@
 import moment from "moment";
 import path from 'path';
 import { readFile, writeFile } from './filesystem'
+import {productsPersistencia} from '..//persistencia/productos';
 
-const carritofile : string = path.resolve(__dirname, './../../file/carrito.json')
+const carritofile : string = path.resolve(__dirname, './../../file/carrito.json');
+const productosfile : string = path.resolve(__dirname, './../../file/productos.json');
 
 let setTime : string = moment(new Date()).format("DD/MM/YYYY HH:MM:SS");
 let carrito : any[] = [];
@@ -27,15 +29,12 @@ let carrito : any[] = [];
 // },
 // ]
 
-// interface addProduct {
-//   timestamp: string,
-//   nombre: string, 
-//   precio: number,
-//   descripcion: string,
-//   codigo: number,
-//   foto: string,
-//   stock: number,
-// }
+interface Cart {
+  id: number,
+  timestamp: string,
+  productos: any [],
+  
+}
 
 // interface Product {
 //   id: number,
@@ -58,7 +57,6 @@ class Carritos {
       if(id){
         const readCarrito: any = await readFile(carritofile);
         carrito = JSON.parse(readCarrito);
-        console.log(carrito)
         return carrito.filter(aCart => aCart.id == id)
       }
       const readCarrito: any = await readFile(carritofile);
@@ -66,40 +64,18 @@ class Carritos {
       return carrito;
     }
   
-    // add(data: addProduct){
+    async add(idcarrito : number ,  id : number){
+
+      carrito = await this.get(1);
+      const infoProducto : any [] = await productsPersistencia.get(id);
+      carrito[0].productos.push(infoProducto[0])
+      const tmpCarrito = JSON.stringify(carrito, null, '\t')
+      await writeFile(tmpCarrito, carritofile)
+      return carrito
+
+      
+    }
   
-    //   const newItem = {
-    //     id: productos.length +1,
-    //     timestamp: setTime,
-    //     nombre: data.nombre,
-    //     descripcion: data.descripcion,
-    //     codigo: data.codigo,
-    //     foto: data.foto,
-    //     precio: data.precio,
-    //     stock: data.stock,
-    //   }
-    //   console.log(newItem)
-    //   productos.push(newItem);
-  
-    //   return newItem;
-    // }
-  
-    // update(id: number, data: addProduct) {
-    //     let findPrd = this.find(id)
-    //     productos = this.get()
-    //     const newItem: Product = {
-    //       id: id,
-    //       timestamp: setTime,
-    //       nombre: data.nombre,
-    //       descripcion: data.descripcion,
-    //       codigo: data.codigo,
-    //       foto: data.foto,
-    //       precio: data.precio,
-    //       stock: data.stock,
-    //     }
-    //     productos.splice(Number(findPrd), 1, newItem);
-    //     return newItem
-    // }
   
     // delete(id: number){
     //   productos = productos.filter(aProduct => aProduct.id !== Number(id))

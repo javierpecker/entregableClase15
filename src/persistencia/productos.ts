@@ -39,7 +39,6 @@ class Productos {
     if(id){
       const read: any = await readFile(productosfile);
       productos = JSON.parse(read);
-      console.log(productos)
       return productos.filter(aProduct => aProduct.id == id)
     }
     const read: any = await readFile(productosfile);

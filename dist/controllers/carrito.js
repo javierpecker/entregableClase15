@@ -31,5 +31,24 @@ class Carrito {
             });
         });
     }
+    // checkAddProducts(req: Request, res: Response, next: NextFunction) {
+    //   const {nombre, precio} = req.body
+    //   if(!nombre || !precio || typeof nombre !== 'string' || isNaN(precio)){
+    //     return res.status(400).json({
+    //       msg: "Campos del body invalidos"
+    //     })
+    //   }
+    //   next();
+    // }
+    addCarrito(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const id = Number(req.params.id);
+            const newItem = yield carrito_1.carritoPersistencia.add(1, id);
+            res.json({
+                msg: "producto agregado con exito al carrito",
+                data: newItem
+            });
+        });
+    }
 }
 exports.carritoController = new Carrito();
