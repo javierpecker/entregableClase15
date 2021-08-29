@@ -1,5 +1,6 @@
 import {Request, Response, NextFunction} from 'express';
 import {carritoPersistencia} from '../persistencia/carrito';
+import {productsPersistencia} from '..//persistencia/productos';
 
 class Carrito {
 
@@ -40,7 +41,9 @@ class Carrito {
   async addCarrito (req : Request, res : Response) {
     const id : number = Number(req.params.id);
 
-    const newItem = await carritoPersistencia.add(1,id);
+    
+
+    const newItem = await carritoPersistencia.add(2,id);
 
     res.json({
       msg: "producto agregado con exito al carrito",
@@ -49,22 +52,26 @@ class Carrito {
   }
 
 
-  // deleteProducts (req : Request, res : Response) {
-  //   const id = Number(req.params.id);
+  async deleteCarrito (req : Request, res : Response) {
+    const id = Number(req.params.id);
 
-  //   const producto = productsPersistencia.find(id);
 
-  //   if(!producto){
-  //     return res.status(404).json({
-  //       msg: "producto not found",
-  //     })
-  //   }
 
-  //   productsPersistencia.delete(id);
-  //   res.json({
-  //     msg: "producto borrado",
-  //   })
-  // }
+    const checkProducto : Number = await productsPersistencia.find(id);
+    console.log(checkProducto)
+
+    if(checkProducto < 0){
+      return res.status(404).json({
+        msg: "producto not found",
+      })
+    }
+    else{
+      await carritoPersistencia.delete(2, id);
+      res.json({
+      msg: "respuesta",
+      })
+    }
+  }  
 }
 
 

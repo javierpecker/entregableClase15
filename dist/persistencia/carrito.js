@@ -21,16 +21,6 @@ const carritofile = path_1.default.resolve(__dirname, './../../file/carrito.json
 const productosfile = path_1.default.resolve(__dirname, './../../file/productos.json');
 let setTime = moment_1.default(new Date()).format("DD/MM/YYYY HH:MM:SS");
 let carrito = [];
-// interface Product {
-//   id: number,
-//   nombre: string, 
-//   precio: number,
-//   descripcion: string,
-//   codigo: number,
-//   foto: string,
-//   stock: number,
-//   timestamp: string,
-// }
 class Carritos {
     find(id = undefined) {
         return carrito.findIndex(aProduct => aProduct.id == Number(id));
@@ -49,13 +39,23 @@ class Carritos {
     }
     add(idcarrito, id) {
         return __awaiter(this, void 0, void 0, function* () {
-            carrito = yield this.get(1);
+            carrito = yield this.get(idcarrito);
             const infoProducto = yield productos_1.productsPersistencia.get(id);
             carrito[0].productos.push(infoProducto[0]);
-            console.log(carrito);
             const tmpCarrito = JSON.stringify(carrito, null, '\t');
             yield filesystem_1.writeFile(tmpCarrito, carritofile);
             return carrito;
+        });
+    }
+    delete(idcarrito, id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const tmpCarrito = yield this.get(idcarrito);
+            //console.log(tmpCarrito)
+            const myCarrito = tmpCarrito[0].productos.filter(aProduct => aProduct.id !== Number(id));
+            tmpCarrito[0].productos = myCarrito;
+            console.log(tmpCarrito[0].productos);
+            const tmp = JSON.stringify(tmpCarrito, null, '\t');
+            yield filesystem_1.writeFile(tmp, carritofile);
         });
     }
 }

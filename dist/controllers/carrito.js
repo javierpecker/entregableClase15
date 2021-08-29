@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.carritoController = void 0;
 const carrito_1 = require("../persistencia/carrito");
+const productos_1 = require("..//persistencia/productos");
 class Carrito {
     getCarrito(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -43,11 +44,29 @@ class Carrito {
     addCarrito(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const id = Number(req.params.id);
-            const newItem = yield carrito_1.carritoPersistencia.add(1, id);
+            const newItem = yield carrito_1.carritoPersistencia.add(2, id);
             res.json({
                 msg: "producto agregado con exito al carrito",
                 data: newItem
             });
+        });
+    }
+    deleteCarrito(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const id = Number(req.params.id);
+            const checkProducto = yield productos_1.productsPersistencia.find(id);
+            console.log(checkProducto);
+            if (checkProducto < 0) {
+                return res.status(404).json({
+                    msg: "producto not found",
+                });
+            }
+            else {
+                yield carrito_1.carritoPersistencia.delete(2, id);
+                res.json({
+                    msg: "respuesta",
+                });
+            }
         });
     }
 }

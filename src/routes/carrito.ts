@@ -9,7 +9,7 @@ router.get("/list/:id", carritoController.getCarrito)
 
 router.post("/add/:id", carritoController.addCarrito)
 
-// router.delete("/delete/:id", carritoController.deleteCart)
+router.delete("/delete/:id", carritoController.deleteCarrito)
 
 
 export default router;
